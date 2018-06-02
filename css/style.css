@@ -16,7 +16,7 @@ body{
 	padding: 20px;
 	font-size: 3em;
 	font-family: monospace;
-	border-radius: 12px;
+	border-radius: 10px;
 }
 
 .NumButtons {
@@ -25,11 +25,11 @@ body{
 }
 
 .NumButtons button{
-	background: ##1E35C8;
-	width: 12%;
+	background: #efefef;
+	width: 13%;
 	margin: 5px;
 	padding: 5px;
-	border: 2px solid #555;
+	border: 1px solid #555;
 	border-radius: 5px;
 	box-shadow: 1px 3px 8px 0px #fff;
 }
