@@ -64,8 +64,7 @@ for(i = 0; i < numButtons.length; i++){
 			Led.innerText = this.innerText;
 			input = true;
 			dotInput = true;
-		}
-		else
+		}else
 			Led.innerText += this.innerText;
 	}
 }
@@ -81,8 +80,7 @@ function binaryOP(){
 	if(CurrentOp !== OperationEnum.NONE){
 		s = +Led.innerText;
 		exec();
-	}
-	else{
+	}else{
 		f = s = +Led.innerText;
 	}
 	input = false;
@@ -198,7 +196,6 @@ sqrButton.onclick = function(){
 	exec();
 }
 subButton.onclick = function(){
-	
 	currentOp = OperationEnum.SUB;
 }
 
@@ -230,8 +227,7 @@ dotButton.onclick = function(){
 			Led.innerText = "0.";
 			input = true;
 			dotInput = true;
-		}
-		else
+		}else
 			Led.innerText += ".";
 	dotInput = false;
 }
