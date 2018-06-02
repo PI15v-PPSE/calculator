@@ -217,7 +217,7 @@ CEButton.onclick = function(){
 /**
 * Кнопка точки похожа на цифровую кнопку
 * но она должна вводиться один раз
-* во время ввода числа
+* во время ввод
 *@return none
 */
 dotButton.onclick = function(){
