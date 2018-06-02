@@ -3,17 +3,17 @@
 * в калькуляторе $openum
 */
 var OperationEnum = {
-	NONE: 0,
-	DIV: 1,
-	MUL: 2,
-	SUB: 3,
-	ADD: 4,
-	SQRT: 5,
-	SIN: 6,
-	COS: 7,
-	LOG: 8,
-	EXP: 9,
-	SQR: 10
+ NONE: 0,
+ DIV: 1,
+ MUL: 2,
+ SUB: 3,
+ ADD: 4,
+ SQRT: 5,
+ SIN: 6,
+ COS: 7,
+ LOG: 8,
+ EXP: 9,
+ SQR: 10
 }
 /**
 *@var float $f первое число для вычислений
@@ -41,7 +41,7 @@ var dotInput = true;
 *@var int $CurrentOp текущая операция.
 * Задается из перечисления OperationEnum @link $openum
 */
-var CurrentOp = OperationEnum.NONE;
+var currentOp = OperationEnum.NONE;
 /**
 *@var object $numButtons содержит блоки кнопок с цифрами
 */
@@ -94,7 +94,7 @@ function binaryOP(){
 *@return none
 */
 function exec(){
-	switch(CurrentOp){
+	switch(currentOp){
 		case OperationEnum.SQRT:
 			res = Math.sqrt(f);
 			break;
@@ -155,55 +155,55 @@ var dotButton = document.getElementById("dot");
 *@return none
 */
 sqrtButton.onclick = function(){
-	CurrentOp = OperationEnum.SQRT;
+	currentOp = OperationEnum.SQRT;
 	f = +Led.innerText;
 	exec();
 }
 
 sinButton.onclick = function(){
-	CurrentOp = OperationEnum.SIN;
+	currentOp = OperationEnum.SIN;
 	f = +Led.innerText;
 	exec();
 }
 cosButton.onclick = function(){
-	CurrentOp = OperationEnum.COS;
+	currentOp = OperationEnum.COS;
 	f = +Led.innerText;
 	exec();
 }
 logButton.onclick = function(){
-	CurrentOp = OperationEnum.LOG;
+	currentOp = OperationEnum.LOG;
 	f = +Led.innerText;
 	exec();
 }
 expButton.onclick = function(){
-	CurrentOp = OperationEnum.EXP;
+	currentOp = OperationEnum.EXP;
 	f = +Led.innerText;
 	exec();
 }
 addButton.onclick = function(){
 	binaryOP();
-	CurrentOp = OperationEnum.ADD;
+	currentOp = OperationEnum.ADD;
 }
 divButton.onclick = function(){
 	binaryOP();
-	CurrentOp = OperationEnum.DIV;
+	currentOp = OperationEnum.DIV;
 }
 mulButton.onclick = function(){
 	binaryOP();
-	CurrentOp = OperationEnum.MUL;
+	currentOp = OperationEnum.MUL;
 }
 sqrButton.onclick = function(){
-	CurrentOp = OperationEnum.SQR;
+	currentOp = OperationEnum.SQR;
 	f = +Led.innerText;
 	exec();
 }
 subButton.onclick = function(){
 	
-	CurrentOp = OperationEnum.SUB;
+	currentOp = OperationEnum.SUB;
 }
 
 equallyButton.onclick = function(){
-	if(CurrentOp == OperationEnum.NONE) return;
+	if(currentOp == OperationEnum.NONE) return;
 	s = + Led.innerText;
 	exec();
 }
@@ -214,7 +214,7 @@ CButton.onclick = function(){
 CEButton.onclick = function(){
 	Led.innerText = 0;
 	input = false;
-	CurrentOp = OperationEnum.NONE;
+	currentOp = OperationEnum.NONE;
 	f = s = 0.;
 }
 
