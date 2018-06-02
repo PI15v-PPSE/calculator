@@ -214,4 +214,19 @@ CEButton.onclick = function(){
 	currentOp = OperationEnum.NONE;
 	f = s = 0.;
 }
-
+/**
+* Кнопка точки похожа на цифровую кнопку
+* но она должна вводиться один раз
+* во время ввода числа
+*@return none
+*/
+dotButton.onclick = function(){
+	if(!dotInput) return;
+	if(input === false){
+			Led.innerText = "0.";
+			input = true;
+			dotInput = true;
+		}else
+			Led.innerText += ".";
+	dotInput = false;
+}
