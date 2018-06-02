@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://docbook.org/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<article xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Калькулятор</title>
+        <author>
+            <orgname>ДонНТУ</orgname>
+            <address>
+<city>Донецк 2018</city>
+           </address>
+            <email>selyutina1998@gmail.com</email>
+        </author>
+        <author>
+            <personname><firstname>Яна</firstname><surname>Селютина</surname></personname>
+        </author>
+    </info>
+    <sect1>
+        <title>О программе</title>
+        <para>Программа калькулятор - кроссплатформенное математическое приложение. Это приложение
+            предназначено для простых вычислений.</para>
+        <informalfigure>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/img1.jpg" align="center" scale="50"
+                        annotations="Внешний вид "/>
+                </imageobject>
+            </mediaobject>
+            <para>Для того, что бы начать пользоваться калькулятором, клонируйте репозиторий <link
+                    xlink:href="https://github.com/YanaSelyutina/gitLabs"/>. После этого откройте в
+                браузере файл index.html</para>
+        </informalfigure>
+    </sect1>
+    <sect1>
+        <title>Сценарии использования</title>
+        <sect2>
+            <title>Сценарий 1 (Простой расчет)</title>
+            <orderedlist>
+                <listitem>
+                    <para>Пользователь вводит первое число и нажимает кнопку бинарной операции<inlinemediaobject>
+                            <imageobject>
+                                <imagedata fileref="images/img2.png" scale="50" align="center"/>
+                            </imageobject>
+                        </inlinemediaobject></para>
+                </listitem>
+                <listitem>
+                    <para>Пользователь вводит второе число.<inlinemediaobject>
+                            <imageobject>
+                                <imagedata fileref="images/img3.png" align="center" scale="50"/>
+                            </imageobject>
+                        </inlinemediaobject></para>
+                </listitem>
+                <listitem>
+                    <para>Пользователь нажимает кнопку "=".<inlinemediaobject>
+                            <imageobject>
+                                <imagedata fileref="images/img4.png" align="center" scale="50"/>
+                            </imageobject>
+                        </inlinemediaobject></para>
+                </listitem>
+            </orderedlist>
+            <para>Ввод числа обеспечивается следующим кодом:</para>
+            <programlistingco>
+                <areaspec/>
+                <programlisting linenumbering="numbered" language="javascript">/**
+*@var object $numButtons содержит блоки кнопок с цифрами
+*/
+var numButtons = document.getElementsByClassName('numButton');
+/**
+*@var object $Led div для записи числа
+*/
+var Led = document.getElementById('led');
+
+/**
+* Устанавливает обработчик нажатия
+*/
+for(i = 0; i &lt; numButtons.length; i++){
+	var t = numButtons[i];
+	/**
+	* Если {@link $input} == false, начинаем вводить новое число
+	*/
+	t.onclick = function(){
+		if(input === false){
+			Led.innerText = this.innerText;
+			input = true;
+			dotInput = true;
+		}
+		else
+			Led.innerText += this.innerText;
+	}
+}</programlisting>
+            </programlistingco>
+            <para>Здесь каждой кнопке с цифрой присваивается обработчик нажатия на кнопку. При
+                нажатии к тексту на экране добавляется цифра, которая указана на кнопке. При нажатии
+                на кнопку "=" выполняется функция exec().</para>
+        </sect2>
+        <sect2>
+            <title>Сценарий 2 (последовательный расчет):</title>
+            <orderedlist>
+                <listitem>
+                    <para>Пользователь вводит первое число и нажимает кнопку бинарной
+                        операции.</para>
+                </listitem>
+                <listitem>
+                    <para>Пользователь вводит второе число и нажимает кнопку любой операции. </para>
+                    <para>Пользователь может выполнить несколько таких операций</para>
+                </listitem>
+                <listitem>
+                    <para>Пользователь вводит последнее число и нажимает кнопку "="</para>
+                </listitem>
+            </orderedlist>
+            <para>Работу такого ввода обеспечивает следующий код:</para>
+            <programlistingco>
+                <areaspec/>
+                <programlisting>function binaryOP(){
+	if(CurrentOp !== OperationEnum.NONE){
+		s = +Led.innerText;
+		exec();
+	}
+	else{
+		f = s = +Led.innerText;
+	}
+	input = false;
+}
+
+var addButton = document.getElementById('add');
+addButton.onclick = function(){
+	binaryOP();
+	CurrentOp = OperationEnum.ADD;
+}</programlisting>
+            </programlistingco>
+            <para>Когда нажата клавиша бинарной операции, вызывается функция binaryOP, в которой
+                записывается число с экрана. После этого запоминается текущая операция.</para>
+        </sect2>
+        <sect2>
+            <title>Унарные операции:</title>
+            <para>В этом случае после ввода числа вызывается унарная операция (sin(x), log(x) и
+                т.д). Выполнение унарных операций обеспечивает следующий код.</para>
+            <programlistingco>
+                <areaspec/>
+                <programlisting>function exec(){
+	switch(CurrentOp){
+		case OperationEnum.SQRT:
+			res = Math.sqrt(f);
+			break;
+		case OperationEnum.SIN:
+			res = Math.sin(f);
+			break;
+		case OperationEnum.COS:
+			res = Math.cos(f);
+			break;
+		case OperationEnum.LOG:
+			res = Math.log(f);
+			break;
+		case OperationEnum.EXP:
+			res = Math.exp(f);
+			break;
+		case OperationEnum.ADD:
+			res = f+s;
+			break;
+		case OperationEnum.DIV:
+			res = f/s;
+			break;
+		case OperationEnum.MUL:
+			res = f*s;
+			break;
+		case OperationEnum.SQR:
+			res = f*f;
+			break;
+		case OperationEnum.SUB:
+			res = f - s;
+			break;
+	}
+	Led.innerText = res;
+	f = res;
+	CurrentOp = OperationEnum.NONE;
+	input = false;
+}
+
+var logButton = document.getElementById('log');
+logButton.onclick = function(){
+	CurrentOp = OperationEnum.LOG;
+	f = +Led.innerText;
+	exec();
+}</programlisting>
+            </programlistingco>
+            <para>Здесь в функции-обработчике устанавливается текущая операция, преобразовуется
+                строка с экрана в число и вызывается функция exec(), которая выполняет все
+                арифметические действия.</para>
+        </sect2>
+    </sect1>
+</article>
