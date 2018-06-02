@@ -25,11 +25,11 @@ body{
 }
 
 .NumButtons button{
-	background: #efefef;
-	width: 13%;
+	background: #E63737;
+	width: 15%;
 	margin: 5px;
 	padding: 5px;
-	border: 1px solid #555;
+	border: 2px solid #555;
 	border-radius: 5px;
 	box-shadow: 1px 3px 8px 0px #fff;
 }
