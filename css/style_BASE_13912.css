@@ -25,11 +25,7 @@ body{
 }
 
 .NumButtons button{
-<<<<<<< HEAD
-	background: #112A78;
-=======
-	background: #781111;
->>>>>>> lab4
+	background: #efefef;
 	width: 13%;
 	margin: 5px;
 	padding: 5px;
